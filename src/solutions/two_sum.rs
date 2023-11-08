@@ -39,23 +39,25 @@ pub fn run() {
     let expected_vec = vec![vec![0, 1], vec![1, 2], vec![0, 1]];
 
     {
+        println!("Running with n2 complexity...");
         let solution_squared_time = SolutionWithTarget::new(
             input_vec.clone(), 
             target_vec.clone(), 
             expected_vec.clone(), 
             two_sum_squared_time);
 
-            solution_squared_time.run();
+            solution_squared_time.run(true);
     }
 
     {
+        println!("Running with n complexity...");
         let solution_constant_time = SolutionWithTarget::new(
             input_vec, 
             target_vec, 
             expected_vec, 
             two_sum_constant_time);
 
-        solution_constant_time.run();
+        solution_constant_time.run(true);
     }
 }
 

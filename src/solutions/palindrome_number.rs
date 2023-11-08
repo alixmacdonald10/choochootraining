@@ -35,21 +35,23 @@ pub fn run() {
     let expected_outputs = vec![true, false, false];
 
     {
+        println!("Running with stringy solution...");
         let solution_stringy = Solution::new(
             inputs.clone(), 
             expected_outputs.clone(), 
             is_palindrome_stringy);
 
-            solution_stringy.run();
+            solution_stringy.run(true);
     }
 
     {
+        println!("Running with numeric solution...");
         let solution_numeric = Solution::new(
             inputs.clone(), 
             expected_outputs.clone(), 
             is_palindrome_numeric);
 
-            solution_numeric.run();
+            solution_numeric.run(true);
     }
 }
 

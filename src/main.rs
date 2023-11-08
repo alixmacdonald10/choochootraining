@@ -4,6 +4,6 @@ mod solutions;
 
 fn main() {
 
-    solutions::palindrome_number::run();
+    solutions::two_sum::run();
 
 }

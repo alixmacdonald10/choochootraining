@@ -1,5 +1,8 @@
 // Solution Runner for Leetcode problems. Could be made into a single struct with Option for additional fields however this will change the signature of F and diverge from Leetcodes signature. So i have kept as seperate structs for now.
 
+use crate::utils::timings;
+use crate::measure_run;
+
 pub struct Solution<T, U, F>
 where
     T: Clone,
@@ -26,19 +29,31 @@ where
         }
     }
 
-    pub fn run(&self) {
+    pub fn run(&self, with_timings: bool) {
+
+        let mut timings: Vec<u128> = Vec::with_capacity(self.inputs.len());
         for i in 0..self.inputs.len() {
-            _ = self.run_specified(i);
+            let input = self.inputs[i].clone();
+            let expected_result = self.expected_outputs[i].clone();
+
+            if with_timings {
+                println!("Run {:?}: ", i);
+                let (result, timing) = measure_run!(self, input.clone(), expected_result);
+                timings.push(timing);
+                assert_eq!(result, expected_result);
+            } else {
+                let result = self.run_specified(input);
+                assert_eq!(result, expected_result);
+            }    
+        }
+
+        if with_timings {
+            timings::summarise_timings(timings);
         }
     }
 
-    pub fn run_specified(&self, item: usize) -> U {
-        let input = self.inputs[item].clone();
-        let expected_result = self.expected_outputs[item].clone();
-
-        let result = (self.solution_func)(input);
-        assert_eq!(result, expected_result);
-        result
+    pub fn run_specified(&self, input: T) -> U {
+        (self.solution_func)(input)
     }
 }
 
@@ -73,19 +88,34 @@ where
         }
     }
 
-    pub fn run(&self) {
+    pub fn run(&self, with_timings: bool) {
+
+        let mut timings = Vec::with_capacity(self.inputs.len());
         for i in 0..self.inputs.len() {
-            _ = self.run_specified(i);
+            let input = self.inputs[i].clone();
+            let target = self.targets[i].clone();
+            let expected_result = self.expected_outputs[i].clone();
+
+
+            if with_timings {
+                println!("Run {:?}: ", i);
+                let (result, timing) = measure_run!(self, input.clone(), target, expected_result);
+                timings.push(timing);
+                assert_eq!(result, expected_result);
+            } else {
+                let result = self.run_specified(input, target);
+                assert_eq!(result, expected_result);
+            }
         }
+
+
+        if with_timings {
+            timings::summarise_timings(timings);
+        }
+
     }
 
-    pub fn run_specified(&self, item: usize) -> V {
-        let input = self.inputs[item].clone();
-        let target = self.targets[item].clone();
-        let expected_result = self.expected_outputs[item].clone();
-
-        let result = (self.solution_func)(input, target);
-        assert_eq!(result, expected_result);
-        result
+    pub fn run_specified(&self, input: T, target: U) -> V {
+        (self.solution_func)(input, target)
     }
 }
