@@ -1,4 +1,8 @@
 // Solution Runner for Leetcode problems. Could be made into a single struct with Option for additional fields however this will change the signature of F and diverge from Leetcodes signature. So i have kept as seperate structs for now.
+use std::env;
+
+use crate::utils::environ::DEBUG_LEVEL;
+
 
 use crate::utils::timings;
 use crate::measure_run;
@@ -29,7 +33,12 @@ where
         }
     }
 
-    pub fn run(&self, with_timings: bool) {
+    pub fn run(&self) {
+
+        let mut with_timings = false;
+        if env::var("CHOOCHOO_PRINTING").is_ok() {
+            with_timings = true;
+        }
 
         let mut timings: Vec<u128> = Vec::with_capacity(self.inputs.len());
         for i in 0..self.inputs.len() {
@@ -88,7 +97,11 @@ where
         }
     }
 
-    pub fn run(&self, with_timings: bool) {
+    pub fn run(&self) {
+        let mut with_timings = false;
+        if env::var(DEBUG_LEVEL).is_ok() {
+            with_timings = true;
+        }
 
         let mut timings = Vec::with_capacity(self.inputs.len());
         for i in 0..self.inputs.len() {

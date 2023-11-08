@@ -41,7 +41,7 @@ pub fn run() {
             expected_outputs.clone(), 
             is_palindrome_stringy);
 
-            solution_stringy.run(true);
+            solution_stringy.run();
     }
 
     {
@@ -51,7 +51,7 @@ pub fn run() {
             expected_outputs.clone(), 
             is_palindrome_numeric);
 
-            solution_numeric.run(true);
+            solution_numeric.run();
     }
 }
 

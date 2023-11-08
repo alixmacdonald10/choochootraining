@@ -46,7 +46,7 @@ pub fn run() {
             expected_vec.clone(), 
             two_sum_squared_time);
 
-            solution_squared_time.run(true);
+            solution_squared_time.run();
     }
 
     {
@@ -57,7 +57,7 @@ pub fn run() {
             expected_vec, 
             two_sum_constant_time);
 
-        solution_constant_time.run(true);
+        solution_constant_time.run();
     }
 }
 
