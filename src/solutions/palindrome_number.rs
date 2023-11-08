@@ -26,10 +26,10 @@
 
 // // use std::collections::VecDeque;
 
-use crate::solution_runner::Solution;
+use crate::utils::solution_runner::Solution;
 
 
-pub fn run_palindrome_number() {
+pub fn run() {
     
     let inputs = vec![121, -121, 10];
     let expected_outputs = vec![true, false, false];

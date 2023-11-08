@@ -30,9 +30,9 @@
 // Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 use std::collections::HashMap;
 
-use crate::solution_runner::SolutionWithTarget;
+use crate::utils::solution_runner::SolutionWithTarget;
 
-pub fn run_two_sum() {
+pub fn run() {
 
     let input_vec = vec![vec![2, 7, 11, 15], vec![3, 2, 4], vec![3, 3]];
     let target_vec = vec![9, 6, 6];
